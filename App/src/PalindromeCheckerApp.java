@@ -3,18 +3,25 @@ import java.util.Scanner;
 
 import java.util.*;
 
-    // Recursive function to check palindrome
-    public static boolean isPalindrome(String str, int start, int end) {
+    public static boolean isPalindrome(String str) {
 
-        if (start >= end) {
-            return true;
+        // Convert to lowercase and remove spaces
+        str = str.toLowerCase().replaceAll("\\s+", "");
+
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+
+            left++;
+            right--;
         }
 
-        if (Character.toLowerCase(str.charAt(start)) != Character.toLowerCase(str.charAt(end))) {
-            return false;
-        }
-
-        return isPalindrome(str, start + 1, end - 1);
+        return true;
     }
 
     public static void main(String[] args) {
@@ -24,35 +31,7 @@ import java.util.*;
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        if (isPalindrome(input, 0, input.length() - 1)) {
-            if (Character.toLowerCase(first) != Character.toLowerCase(last)) {
-
-        // Compare front and rear
-        while (deque.size() > 1) {
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-
-            if (Character.toLowerCase(front) != Character.toLowerCase(rear)) {
-
-
-        // Compare dequeue from queue and pop from stack
-        while (!queue.isEmpty()) {
-
-            char qChar = queue.remove();  // Dequeue
-            char sChar = stack.pop();     // Pop
-
-            if (qChar != sChar) {
-        // Continue comparison until pointers cross
-        while (start < end) {
-            if (chars[start] != chars[end]) {
-
-                isPalindrome = false;
-                break;
-            }
-        }
-
-
-        if (isPalindrome) {
+        if (isPalindrome(input)) {
             System.out.println("The string is a Palindrome");
 
         // Result
