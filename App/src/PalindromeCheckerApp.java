@@ -1,52 +1,30 @@
 
 import java.util.Scanner;
-import java.util.LinkedList;
 
 import java.util.*;
 
+    // Recursive function to check palindrome
+    public static boolean isPalindrome(String str, int start, int end) {
 
-public class PalindromeCheckerApp {
+        if (start >= end) {
+            return true;
+        }
+
+        if (Character.toLowerCase(str.charAt(start)) != Character.toLowerCase(str.charAt(end))) {
+            return false;
+        }
+
+        return isPalindrome(str, start + 1, end - 1);
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        System.out.print("Enter a string: ");
-        String input = sc.nextLine();
-
-        LinkedList<Character> list = new LinkedList<>();
-        // Create Queue and Stack
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
-
-        // Insert characters into queue and stack
-        for(int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            queue.add(ch);   // Enqueue
-            stack.push(ch);  // Push
-        }
-        // Ask user for input
-        System.out.print("Enter a string: ");
-        String input = scanner.nextLine()
-
-
-        Deque<Character> deque = new ArrayDeque<>();
-
-        // Add characters to LinkedList
-        for (int i = 0; i < input.length(); i++) {
-            list.add(input.charAt(i));
-        }
-
-        boolean isPalindrome = true;
-
-        // Compare first and last characters
-        while (list.size() > 1) {
-            char first = list.removeFirst();
-            char last = list.removeLast();
-
+        if (isPalindrome(input, 0, input.length() - 1)) {
             if (Character.toLowerCase(first) != Character.toLowerCase(last)) {
 
         // Compare front and rear
