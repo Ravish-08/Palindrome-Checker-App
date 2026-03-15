@@ -1,15 +1,11 @@
 
 import java.util.Scanner;
 
-// Strategy Interface
-interface PalindromeStrategy {
-    boolean isPalindrome(String str);
-}
+public class PalindromeCheckerApp {
 
-// Strategy 1: Simple Two-Pointer Algorithm
-class SimplePalindromeStrategy implements PalindromeStrategy {
+    // Two Pointer Method
+    public static boolean twoPointerPalindrome(String str) {
 
-    public boolean isPalindrome(String str) {
         str = str.toLowerCase().replaceAll("\\s+", "");
 
         int left = 0;
@@ -25,24 +21,18 @@ class SimplePalindromeStrategy implements PalindromeStrategy {
 
         return true;
     }
-}
 
-// Strategy Context
-class PalindromeContext {
+    // Recursive Method
+    public static boolean recursivePalindrome(String str, int start, int end) {
 
-    private PalindromeStrategy strategy;
+        if (start >= end)
+            return true;
 
-    public PalindromeContext(PalindromeStrategy strategy) {
-        this.strategy = strategy;
+        if (str.charAt(start) != str.charAt(end))
+            return false;
+
+        return recursivePalindrome(str, start + 1, end - 1);
     }
-
-    public boolean checkPalindrome(String str) {
-        return strategy.isPalindrome(str);
-    }
-}
-
-// Main Application
-public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
@@ -51,35 +41,23 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        // Choose algorithm strategy
-        PalindromeStrategy strategy = new SimplePalindromeStrategy();
+        input = input.toLowerCase().replaceAll("\\s+", "");
 
-        PalindromeContext context = new PalindromeContext(strategy);
+        // Two Pointer Performance
+        long start1 = System.nanoTime();
+        boolean result1 = twoPointerPalindrome(input);
+        long end1 = System.nanoTime();
 
-        if (context.checkPalindrome(input)) {
-            System.out.println("The string is a Palindrome");
+        // Recursive Performance
+        long start2 = System.nanoTime();
+        boolean result2 = recursivePalindrome(input, 0, input.length() - 1);
+        long end2 = System.nanoTime();
 
-        // Result
-        if (isPalindrome) {
-            System.out.println("The string is a Palindrome.");
-        } else {
-            System.out.println("The string is NOT a Palindrome.");
-        // Display result
-        if (isPalindrome) 
-        String reversed = "";
+        System.out.println("Two Pointer Result: " + result1);
+        System.out.println("Time Taken: " + (end1 - start1) + " ns");
 
-        // Iterate from the last character to the first
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
-        }
-
-        // Compare original string with reversed string
-        if (input.equals(reversed)) {
-            System.out.println("The string \"" + input + "\" is a palindrome.");
-
-        } else {
-            System.out.println("The string is NOT a Palindrome");
-        }
+        System.out.println("Recursive Result: " + result2);
+        System.out.println("Time Taken: " + (end2 - start2) + " ns");
 
         sc.close();
     }
