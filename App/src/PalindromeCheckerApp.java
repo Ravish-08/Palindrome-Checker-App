@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
-
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -31,7 +30,16 @@ public class PalindromeCheckerApp {
         }
 
         // Display result
-        if (isPalindrome) {
+        if (isPalindrome) 
+        String reversed = "";
+
+        // Iterate from the last character to the first
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
+        }
+
+        // Compare original string with reversed string
+        if (input.equals(reversed)) {
             System.out.println("The string \"" + input + "\" is a palindrome.");
         } else {
             System.out.println("The string \"" + input + "\" is NOT a palindrome.");
